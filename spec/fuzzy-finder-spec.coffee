@@ -123,8 +123,8 @@ describe 'FuzzyFinder', ->
             runs ->
               expect(projectView.list.find("li:contains(symlink-to-file)")).toExist()
 
-          it "excludes symlinked folder paths if traverseIntoSymlinkDirectories is false", ->
-            atom.config.set('fuzzy-finder.traverseIntoSymlinkDirectories', false)
+          it "excludes symlinked folder paths if followSymlinks is false", ->
+            atom.config.set('core.followSymlinks', false)
 
             jasmine.attachToDOM(workspaceElement)
             projectView.setMaxItems(Infinity)
@@ -137,8 +137,8 @@ describe 'FuzzyFinder', ->
               expect(projectView.list.find("li:contains(symlink-to-dir)")).not.toExist()
               expect(projectView.list.find("li:contains(symlink-to-dir/a)")).not.toExist()
 
-          it "includes symlinked folder paths if traverseIntoSymlinkDirectories is true", ->
-            atom.config.set('fuzzy-finder.traverseIntoSymlinkDirectories', true)
+          it "includes symlinked folder paths if followSymlinks is true", ->
+            atom.config.set('core.followSymlinks', true)
 
             jasmine.attachToDOM(workspaceElement)
             projectView.setMaxItems(Infinity)

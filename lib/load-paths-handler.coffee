@@ -59,8 +59,8 @@ loadFolder = (folderPath) ->
     loadPath(path.join(folderPath, childName)) for childName in children
     asyncCallDone()
 
-module.exports = (rootPath, traverseIntoSymlinkDirectories, ignoreVcsIgnores, ignores=[]) ->
-  traverseSymlinkDirectories = traverseIntoSymlinkDirectories
+module.exports = (rootPath, followSymlinks, ignoreVcsIgnores, ignores=[]) ->
+  traverseSymlinkDirectories = followSymlinks
   ignoredNames = []
   for ignore in ignores when ignore
     try
