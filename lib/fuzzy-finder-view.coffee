@@ -7,6 +7,7 @@ module.exports =
 class FuzzyFinderView extends SelectListView
   filePaths: null
   projectRelativePaths: null
+  lastFilterText: ''
 
   initialize: ->
     super
@@ -157,10 +158,13 @@ class FuzzyFinderView extends SelectListView
     @storeFocusedElement()
     @panel ?= atom.workspace.addModalPanel(item: this)
     @panel.show()
+    @filterEditorView.setText(@lastFilterText)
     @focusFilterEditor()
+    @filterEditorView.getModel().selectAll()
 
   hide: ->
     @panel?.hide()
 
   cancelled: ->
+    @lastFilterText = @filterEditorView.getText()
     @hide()
